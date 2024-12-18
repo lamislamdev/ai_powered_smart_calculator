@@ -4,7 +4,7 @@
 
 
     <div class="h-[9vh] z-30 bg-gray-600 text-gray-100 items-center flex top-0 md:justify-evenly gap-2 md:gap-10 fixed right-0 left-0  ">
-        <div class="md:inline hidden">
+        <div class="md:inline ">
             <img class="h-[8vh]" src="{{asset('assets/img/logo.png')}}" alt="">
         </div>
         <div class="items-center flex md:justify-center gap-2 md:gap-10 text-sm md:text-lg">
@@ -20,7 +20,7 @@
         </button>
 
         <a href="#answer">
-            <button id="answerButton" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold md:py-1 md:px-2 rounded inline-flex items-center">
+            <button  onclick="getAnswer()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold md:py-1 md:px-2 rounded inline-flex items-center">
                 <img class=" w-2 md:w-4  h-2 md:h-4 mr-1 " src=" {{asset('assets/img/answer.svg')}}" alt="">                <span>Get Answer</span>
             </button>
         </a>
@@ -29,14 +29,20 @@
     </div>
 
     <div class="md:flex grid gap-2 justify-evenly items-center mt-[10vh]">
-        <div class="bg-gray-700">
+        <div class="bg-gray-700 rounded-md ">
             <canvas class="cursor-cell" id="drawingCanvas" width="700" height="550"></canvas>
         </div>
 
-        <div>
-            <div class=" w-[100vw] h-[100vh] md:w-[40vw] md:h-[550px] bg-gray-600">
-                <div id="answer" class="text-white p-5 overflow-y-auto"> dsfsdfvsvfsvsdsdfsdfafafadfafaff  uf iueq iowfoiw foiw wo fw gfoiw fw</div>
+        <div class=" w-[100vw] h-[100vh] md:w-[40vw] md:h-[550px] rounded-md bg-gray-600">
+            <div class="mb-1" >
+                <div id="answer" class=" w-[100vw] h-[90vh] md:w-[40vw] md:h-[510px] text-white p-5 overflow-auto"> Answer Show Here....</div>
             </div>
+            <div class="md:w-full h-[40px] flex justify-center items-center gap-x-2 pb-4 px-3">
+                <input type="text" class=" w-full bg-gray-500 border-2 py-1 border-orange-400 text-white rounded-md " name="prompt" id="prompt" placeholder="Enter Your Extra Question ">
+                <button  onclick="getAnswer()" class=" px-4 py-2 text-sm font-bold hover:bg-green-500  bg-lime-400 rounded-md ">Answer</button>
+
+            </div>
+
         </div>
 
     </div>
@@ -49,7 +55,8 @@
     const colorPicker = document.getElementById('colorPicker');
     const resetButton = document.getElementById('resetButton');
     const eraseButton = document.getElementById('eraseButton');
-    const answerButton = document.getElementById('answerButton');
+
+    // const answerButton = document.getElementById('answerButton');
     const answer = document.getElementById('answer');
 
     let drawing = false;
@@ -124,14 +131,15 @@
     });
 
     // Convert canvas to image and send it to the backend
-    answerButton.addEventListener('click', async () => {
+     async function getAnswer() {
+         const prompt = document.getElementById('prompt').value;
         const imageData = canvas.toDataURL('image/png'); // Convert canvas to base64 image
 
         if (answer) {
 
 
             try {
-                const response = await axios.post('/image', { image: imageData });
+                const response = await axios.post('/api/post-data', { image: imageData, prompt: prompt});
                 const htmlContent = marked.parse(response.data.info.text);
 
 // Insert the HTML into the DOM
@@ -144,7 +152,7 @@
         } else {
             console.error('Image element not found');
         }
-    });
+    };
 
     // Mouse event listeners
     canvas.addEventListener('mousedown', startDrawing);
