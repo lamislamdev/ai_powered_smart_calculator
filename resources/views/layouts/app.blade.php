@@ -15,6 +15,6 @@
 
 @include('components.drawPad')
 
-
+@include('components.footer')
 </body>
 </html>
