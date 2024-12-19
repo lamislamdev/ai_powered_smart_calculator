@@ -11,13 +11,13 @@
             <!-- Social Media Icons -->
             <div class="flex justify-center md:justify-start gap-6 mb-6 md:mb-0">
                 <a href="{{url('https://www.linkedin.com/in/lamislamdev/')}}" target="_blank" class="text-gray-300 hover:text-gray-100 transition-colors duration-300">
-                  <img class="h-10" src="{{asset('assets/img/footer/linkedin.svg')}}">
+                  <img class="h-10 hover:invert" src="{{asset('assets/img/footer/linkedin.svg')}}">
                 </a>
                 <a href="{{url('https://www.facebook.com/lamislamdev')}}" target="_blank" class="text-gray-300 hover:text-gray-100 transition-colors duration-300">
-                    <img class="h-10" src="{{asset('assets/img/footer/facebook.svg')}}">
+                    <img class="h-10 hover:invert" src="{{asset('assets/img/footer/facebook.svg')}}">
                 </a>
                 <a href="{{url('https://https://wa.me/8801933482545')}}" target="_blank" class="text-gray-300 hover:text-gray-100 transition-colors duration-300">
-                    <img class="h-10" src="{{asset('assets/img/footer/whatsapp.svg')}}">
+                    <img class="h-10 hover:invert" src="{{asset('assets/img/footer/whatsapp.svg')}}">
                 </a>
             </div>
         </div>
